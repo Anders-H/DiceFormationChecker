@@ -1,8 +1,7 @@
-﻿namespace Winsoft.Gaming.DiceFormationChecker;
+﻿namespace Winsoft.Gaming.DiceFormationChecker.FormationNames;
 
-public enum FormationName
+public enum FormationNameSixDice
 {
-    Nothing = 0,
     Par = 1,
     TwoPairs = 2,
     ThreePairs = 3,
@@ -15,6 +14,5 @@ public enum FormationName
     FullHouse = 10,
     Villa = 11,
     Tower = 12,
-    Yatzy = 13,
     MaxiYatzy = 14
 }

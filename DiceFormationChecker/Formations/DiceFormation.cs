@@ -1,13 +1,11 @@
-﻿using System.Windows.Markup;
+﻿using Winsoft.Gaming.DiceFormationChecker.Scoring;
 
-namespace Winsoft.Gaming.DiceFormationChecker;
+namespace Winsoft.Gaming.DiceFormationChecker.Formations;
 
 public class DiceFormation
 {
     public List<int> Values { get; }
-    public List<int> DicesInFormationIndices { get; }
-    public int Score { get; }
-    public FormationName FormationName { get; }
+    public List<FormationNameAndScore> FormationNameAndScore { get; }
 
     public int DiceSumValue => Values.Sum();
 
@@ -18,11 +16,9 @@ public class DiceFormation
     public int SumFive => Values.Where(x => x == 5).Sum();
     public int SumSix => Values.Where(x => x == 6).Sum();
 
-    public DiceFormation(int score, FormationName formationName)
+    public DiceFormation()
     {
         Values = new List<int>();
-        DicesInFormationIndices = new List<int>();
-        Score = score;
-        FormationName = formationName;
+        FormationNameAndScore = new List<FormationNameAndScore>();
     }
 }

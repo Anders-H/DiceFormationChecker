@@ -1,4 +1,6 @@
 using Winsoft.Gaming.DiceFormationChecker;
+using Winsoft.Gaming.DiceFormationChecker.Exceptions;
+using Winsoft.Gaming.DiceFormationChecker.FormationNames;
 using Xunit;
 
 namespace DiceFormationCheckerTests
@@ -50,13 +52,15 @@ namespace DiceFormationCheckerTests
         [Fact]
         public void CanDetectFiveDiceFormations()
         {
-            Assert.Equal(FormationNameFiveDice.Yatzy, new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().FormationName);
+            Assert.NotNull(new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.Yatzy));
+            Assert.Equal(100, new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.Yatzy).Score);
         }
 
         [Fact]
         public void CanDetectSixDiceFormations()
         {
-            Assert.Equal(FormationNameSixDice.MaxiYatzy, new FormationChecker(2, 2, 2, 2, 2).CheckSixDice().FormationName);
+            Assert.NotNull(new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.MaxiYatzy));
+            Assert.Equal(100, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.MaxiYatzy).Score);
         }
     }
 }

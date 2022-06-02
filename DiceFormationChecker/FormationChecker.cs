@@ -1,4 +1,9 @@
-﻿namespace Winsoft.Gaming.DiceFormationChecker;
+﻿using Winsoft.Gaming.DiceFormationChecker.Exceptions;
+using Winsoft.Gaming.DiceFormationChecker.FormationNames;
+using Winsoft.Gaming.DiceFormationChecker.Formations;
+using Winsoft.Gaming.DiceFormationChecker.Scoring;
+
+namespace Winsoft.Gaming.DiceFormationChecker;
 
 public class FormationChecker
 {
@@ -28,9 +33,6 @@ public class FormationChecker
         for (var i = 1; i <= 6; i++)
             Occurrences.Add(Dices.Count(x => x == i));
 
-        var formationName = FormationName.Nothing;
-        var score = 0;
-
         var twoOfSame1 = Occurrences.FindIndex(x => x == 2) + 1;
         var twoOfSame2 = Occurrences.FindIndex(twoOfSame1, x => x == 2) + 1;
         var twoOfSame3 = Occurrences.FindIndex(twoOfSame2, x => x == 2) + 1;
@@ -47,65 +49,59 @@ public class FormationChecker
             .First();
 
         var fourOfSame = Occurrences.FindIndex(x => x == 4) + 1;
-
+        
         var fiveOfSame = Occurrences.FindIndex(x => x == 5) + 1;
 
+        var formations = new FormationNameAndScoreList();
+
         if (Occurrences.Any(x => x == Dices.Count))
-        {
-            formationName = Dices.Count == 6
-                ? FormationName.MaxiYatzy
-                : FormationName.Yatzy;
+            formations.Add(100, Dices.Count == 6 ? FormationName.MaxiYatzy : FormationName.Yatzy);
 
-            score = 100;
-        }
-        else if (twoOfSame1 > 0 && fourOfSame > 0)
-        {
-            formationName = FormationName.Tower;
-            score = twoOfSameHighest * 2 + fourOfSame * 4;
-        }
-        else if (threeOfSame1 > 0 && threeOfSame2 > 0)
-        {
-            formationName = FormationName.Villa;
-            score = threeOfSame1 * 3 + threeOfSame2 * 3;
-        }
-        else if (twoOfSame1 > 0 && threeOfSame1 > 0)
-        {
-            formationName = FormationName.FullHouse;
-            score = twoOfSameHighest * 2 + threeOfSameHightest * 3;
-        }
-        else if (Occurrences.All(x => x == 1))
-        {
-            formationName = FormationName.FullStraight;
-            score = 21;
-        }
-        else if (Occurrences[1] > 0 && Occurrences[2] > 0 && Occurrences[3] > 0 && Occurrences[4] > 0 && Occurrences[5] > 0)
-        {
-            formationName = FormationName.BigStraight;
-            score = 20;
-        }
-        else if (Occurrences[0] > 0 && Occurrences[1] > 0 && Occurrences[2] > 0 && Occurrences[3] > 0 && Occurrences[4] > 0)
-        {
-            formationName = FormationName.SmallStraight;
-            score = 15;
-        }
-        else if (fiveOfSame > 0)
-        {
-            formationName = FormationName.FiveOfAKind;
-            score = fiveOfSame * 5;
-        }
-        else if (fourOfSame > 0)
-        {
-            formationName = FormationName.FourOfAKind;
-            score = fourOfSame * 4;
-        }
-        else if ()
-        {
-            ...
-        }
+        if (twoOfSame1 > 0 && fourOfSame > 0)
+            formations.Add(twoOfSameHighest * 2 + fourOfSame * 4, FormationName.Tower);
 
-        var formation = new DiceFormation(score, formationName);
+        if (threeOfSame1 > 0 && threeOfSame2 > 0)
+            formations.Add(threeOfSame1 * 3 + threeOfSame2 * 3, FormationName.Villa);
+
+        if (twoOfSame1 > 0 && threeOfSame1 > 0)
+            formations.Add(twoOfSameHighest * 2 + threeOfSameHightest * 3, FormationName.FullHouse);
+
+        if (Occurrences.All(x => x == 1))
+            formations.Add(21, FormationName.FullStraight);
+
+        if (Occurrences[1] > 0 && Occurrences[2] > 0 && Occurrences[3] > 0 && Occurrences[4] > 0 && Occurrences[5] > 0)
+            formations.Add(20, FormationName.BigStraight);
+
+        if (Occurrences[0] > 0 && Occurrences[1] > 0 && Occurrences[2] > 0 && Occurrences[3] > 0 && Occurrences[4] > 0)
+            formations.Add(15, FormationName.SmallStraight);
+
+        if (fiveOfSame > 0)
+            formations.Add(fiveOfSame * 5, FormationName.FiveOfAKind);
+
+        if (fourOfSame > 0)
+            formations.Add(fourOfSame * 4, FormationName.FourOfAKind);
+
+        if (threeOfSame1 > 0)
+            formations.Add(threeOfSameHightest * 3, FormationName.ThreeOfAKind);
+
+        if (twoOfSame1 > 0 && twoOfSame2 > 0 && twoOfSame3 > 0)
+            formations.Add(twoOfSame1 * 2 + twoOfSame2 * 2 + twoOfSame3 * 2, FormationName.ThreePairs);
+
+        if (twoOfSame1 > 0 && twoOfSame2 > 0)
+            formations.Add(twoOfSame1 * 2 + twoOfSame2 * 2, FormationName.TwoPairs);
+
+        if (twoOfSame1 > 0 && twoOfSame2 > 0)
+            formations.Add(twoOfSame1 * 2 + twoOfSame2 * 2, FormationName.TwoPairs);
+
+        if (twoOfSame1 > 0)
+            formations.Add(twoOfSame1 * 2, FormationName.Pair);
+
+        if (formations.Count <= 0)
+            formations.Add(0, FormationName.Nothing);
+
+        var formation = new DiceFormation();
         formation.Values.AddRange(Dices);
-
+        formation.FormationNameAndScore.AddRange(formations);
         return formation;
     }
 

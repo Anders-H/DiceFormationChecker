@@ -1,4 +1,4 @@
-﻿namespace Winsoft.Gaming.DiceFormationChecker;
+﻿namespace Winsoft.Gaming.DiceFormationChecker.Exceptions;
 
 public class WrongNumberOfDiceException : SystemException
 {
