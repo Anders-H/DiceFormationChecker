@@ -1,12 +1,9 @@
-﻿using Winsoft.Gaming.DiceFormationChecker.Scoring;
+﻿using Winsoft.Gaming.DiceFormationChecker.Formations.Abstracts;
 
 namespace Winsoft.Gaming.DiceFormationChecker.Formations;
 
-public class DiceFormation
+public class DiceFormation : GenericFormation
 {
-    public List<int> Values { get; }
-    public List<FormationNameAndScore> FormationNameAndScore { get; }
-
     public int DiceSumValue => Values.Sum();
 
     public int SumOne => Values.Where(x => x == 1).Sum();
@@ -15,10 +12,4 @@ public class DiceFormation
     public int SumFour => Values.Where(x => x == 4).Sum();
     public int SumFive => Values.Where(x => x == 5).Sum();
     public int SumSix => Values.Where(x => x == 6).Sum();
-
-    public DiceFormation()
-    {
-        Values = new List<int>();
-        FormationNameAndScore = new List<FormationNameAndScore>();
-    }
 }

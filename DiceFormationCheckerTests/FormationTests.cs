@@ -52,15 +52,17 @@ namespace DiceFormationCheckerTests
         [Fact]
         public void CanDetectFiveDiceFormations()
         {
-            Assert.NotNull(new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.Yatzy));
             Assert.Equal(100, new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.Yatzy).Score);
+            Assert.Equal(17, new FormationChecker(3, 4, 4, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.FullHouse).Score);
         }
 
         [Fact]
         public void CanDetectSixDiceFormations()
         {
-            Assert.NotNull(new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.MaxiYatzy));
             Assert.Equal(100, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.MaxiYatzy).Score);
+            Assert.Equal(14, new FormationChecker(2, 2, 3, 3, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.Tower).Score);
+            Assert.Equal(15, new FormationChecker(2, 2, 3, 3, 3, 2).CheckSixDice().GetFormation(FormationNameSixDice.Villa).Score);
+            Assert.Equal(13, new FormationChecker(2, 1, 3, 3, 3, 2).CheckSixDice().GetFormation(FormationNameSixDice.FullHouse).Score);
         }
     }
 }
