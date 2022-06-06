@@ -2,7 +2,7 @@
 
 public enum FormationNameSixDice
 {
-    Par = 1,
+    Pair = 1,
     TwoPairs = 2,
     ThreePairs = 3,
     ThreeOfAKind = 4,

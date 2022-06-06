@@ -3,7 +3,7 @@
 public enum FormationNameFiveDice
 {
     Nothing = 0,
-    Par = 1,
+    Pair = 1,
     TwoPairs = 2,
     ThreeOfAKind = 4,
     FourOfAKind = 5,

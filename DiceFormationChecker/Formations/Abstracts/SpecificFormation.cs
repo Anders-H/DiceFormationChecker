@@ -33,4 +33,8 @@ public abstract class SpecificFormation : GenericFormation
         SumFive = f.SumFive;
         SumSix = f.SumSix;
     }
+
+    public FormationNameAndScore? GetFormation(FormationName name) =>
+        FormationNameAndScore
+            .FirstOrDefault(formationNameAndScore => formationNameAndScore.FormationName == name);
 }
