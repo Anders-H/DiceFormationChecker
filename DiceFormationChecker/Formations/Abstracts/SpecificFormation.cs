@@ -21,7 +21,13 @@ public abstract class SpecificFormation : GenericFormation
 
         Values.AddRange(f.Values);
 
-        foreach (var formationNameAndScore in f.FormationNameAndScore.Where(formationNameAndScore => Enum.IsDefined(typeof(FormationNameFiveDice), formationNameAndScore.FormationName)))
+        foreach (
+            var formationNameAndScore
+            in f.FormationNameAndScore
+                .Where(
+                    formationNameAndScore => Enum.IsDefined(typeof(FormationNameFiveDice), (FormationNameFiveDice)formationNameAndScore.FormationName)
+                )
+        )
             FormationNameAndScore.Add(new FormationNameAndScore(formationNameAndScore.Score, formationNameAndScore.FormationName));
 
         DiceSumValue = f.DiceSumValue;
