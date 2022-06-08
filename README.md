@@ -2,6 +2,10 @@
 
 A class that checks the formation of five or six dice for .NET 6.
 
+```
+Install-Package Winsoft.Gaming.DiceFormationChecker
+```
+
 ## Five dice example
 
 ```
