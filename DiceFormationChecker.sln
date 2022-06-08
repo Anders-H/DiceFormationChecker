@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winsoft.Gaming.DiceFormationChecker", "DiceFormationChecker\Winsoft.Gaming.DiceFormationChecker.csproj", "{4B6CECAF-FE8F-45D7-9F77-07E9420CA610}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Winsoft.Gaming.DiceFormationChecker", "DiceFormationChecker\Winsoft.Gaming.DiceFormationChecker.csproj", "{4B6CECAF-FE8F-45D7-9F77-07E9420CA610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceFormationCheckerTests", "DiceFormationCheckerTests\DiceFormationCheckerTests.csproj", "{2DF703A9-633D-4920-8473-BF944D0A2675}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiceFormationCheckerTests", "DiceFormationCheckerTests\DiceFormationCheckerTests.csproj", "{2DF703A9-633D-4920-8473-BF944D0A2675}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceFormationCheckerExample", "DiceFormationCheckerExample\DiceFormationCheckerExample.csproj", "{826D9760-DCBE-4245-BDCF-BF8A096326BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2DF703A9-633D-4920-8473-BF944D0A2675}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DF703A9-633D-4920-8473-BF944D0A2675}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DF703A9-633D-4920-8473-BF944D0A2675}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826D9760-DCBE-4245-BDCF-BF8A096326BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826D9760-DCBE-4245-BDCF-BF8A096326BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826D9760-DCBE-4245-BDCF-BF8A096326BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826D9760-DCBE-4245-BDCF-BF8A096326BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

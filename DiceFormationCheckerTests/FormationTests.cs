@@ -67,13 +67,6 @@ namespace DiceFormationCheckerTests
         [Fact]
         public void CanDetectSixDiceFormations()
         {
-            var fc = new FormationChecker(2, 2, 2, 2, 2, 2);
-            var formations = fc.CheckSixDice();
-            var f = formations.GetFormation(FormationNameSixDice.MaxiYatzy);
-            Assert.Equal(100, f.Score);
-
-
-
             Assert.Equal(100, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.MaxiYatzy)!.Score);
             Assert.Equal(14, new FormationChecker(2, 2, 3, 3, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.Tower)!.Score);
             Assert.Equal(15, new FormationChecker(2, 2, 3, 3, 3, 2).CheckSixDice().GetFormation(FormationNameSixDice.Villa)!.Score);
