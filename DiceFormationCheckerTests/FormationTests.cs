@@ -56,6 +56,7 @@ namespace DiceFormationCheckerTests
             Assert.Equal(12, new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.FourOfAKind)!.Score);
             Assert.Equal(9, new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.ThreeOfAKind)!.Score);
             Assert.Equal(6, new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.Pair)!.Score);
+            Assert.Null(new FormationChecker(3, 3, 3, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.TwoPairs));
 
             Assert.Equal(17, new FormationChecker(3, 4, 4, 3, 3).CheckFiveDice().GetFormation(FormationNameFiveDice.FullHouse)!.Score);
             Assert.Equal(20, new FormationChecker(5, 4, 6, 3, 2).CheckFiveDice().GetFormation(FormationNameFiveDice.BigStraight)!.Score);
@@ -72,10 +73,11 @@ namespace DiceFormationCheckerTests
         public void CanDetectSixDiceFormations()
         {
             Assert.Equal(100, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.MaxiYatzy)!.Score);
-            Assert.Equal(15, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.FiveOfAKind)!.Score);
-            Assert.Equal(12, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.FourOfAKind)!.Score);
-            Assert.Equal(9, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.ThreeOfAKind)!.Score);
-            Assert.Equal(6, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.Pair)!.Score);
+            Assert.Equal(10, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.FiveOfAKind)!.Score);
+            Assert.Equal(8, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.FourOfAKind)!.Score);
+            Assert.Equal(6, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.ThreeOfAKind)!.Score);
+            Assert.Equal(4, new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.Pair)!.Score);
+            Assert.Null(new FormationChecker(2, 2, 2, 2, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.TwoPairs));
 
             Assert.Equal(14, new FormationChecker(2, 2, 3, 3, 2, 2).CheckSixDice().GetFormation(FormationNameSixDice.Tower)!.Score);
             Assert.Equal(13, new FormationChecker(2, 1, 3, 3, 3, 2).CheckSixDice().GetFormation(FormationNameSixDice.FullHouse)!.Score);

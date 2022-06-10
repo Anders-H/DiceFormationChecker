@@ -33,24 +33,24 @@ public class FormationChecker
         for (var i = 1; i <= 6; i++)
             Occurrences.Add(Dices.Count(x => x == i));
 
-        var twoOfSame1 = Occurrences.FindIndex(x => x == 2) + 1;
-        var twoOfSame2 = Occurrences.FindIndex(twoOfSame1, x => x == 2) + 1;
-        var twoOfSame3 = Occurrences.FindIndex(twoOfSame2, x => x == 2) + 1;
+        var twoOfSame1 = Occurrences.FindIndex(x => x >= 2) + 1;
+        var twoOfSame2 = Occurrences.FindIndex(twoOfSame1, x => x >= 2) + 1;
+        var twoOfSame3 = Occurrences.FindIndex(twoOfSame2, x => x >= 2) + 1;
         
         var twoOfSameHighest = new[] { twoOfSame1, twoOfSame2, twoOfSame3 }
             .OrderByDescending(x => x)
             .First();
 
-        var threeOfSame1 = Occurrences.FindIndex(x => x == 3) + 1;
-        var threeOfSame2 = Occurrences.FindIndex(threeOfSame1, x => x == 3) + 1;
+        var threeOfSame1 = Occurrences.FindIndex(x => x >= 3) + 1;
+        var threeOfSame2 = Occurrences.FindIndex(threeOfSame1, x => x >= 3) + 1;
 
         var threeOfSameHightest = new[] { threeOfSame1, threeOfSame2 }
             .OrderByDescending(x => x)
             .First();
 
-        var fourOfSame = Occurrences.FindIndex(x => x == 4) + 1;
+        var fourOfSame = Occurrences.FindIndex(x => x >= 4) + 1;
         
-        var fiveOfSame = Occurrences.FindIndex(x => x == 5) + 1;
+        var fiveOfSame = Occurrences.FindIndex(x => x >= 5) + 1;
 
         var formations = new FormationNameAndScoreList();
 
