@@ -33,35 +33,44 @@ public class FormationChecker
         for (var i = 1; i <= 6; i++)
             Occurrences.Add(Dices.Count(x => x == i));
 
+        var formationParts = new FormationPartList();
+
         var twoOfSame1 = Occurrences.FindIndex(x => x >= 2) + 1;
+        if (twoOfSame1 > 0)
+            formationParts.Add(twoOfSame1, 2);
+
         var twoOfSame2 = Occurrences.FindIndex(twoOfSame1, x => x >= 2) + 1;
+        if (twoOfSame2 > 0)
+            formationParts.Add(twoOfSame2, 2);
+
         var twoOfSame3 = Occurrences.FindIndex(twoOfSame2, x => x >= 2) + 1;
-        
-        var twoOfSameHighest = new[] { twoOfSame1, twoOfSame2, twoOfSame3 }
-            .OrderByDescending(x => x)
-            .First();
+        if (twoOfSame3 > 0)
+            formationParts.Add(twoOfSame3, 2);
 
         var threeOfSame1 = Occurrences.FindIndex(x => x >= 3) + 1;
-        var threeOfSame2 = Occurrences.FindIndex(threeOfSame1, x => x >= 3) + 1;
+        if (threeOfSame1 > 0)
+            formationParts.Add(threeOfSame1, 3);
 
-        var threeOfSameHightest = new[] { threeOfSame1, threeOfSame2 }
-            .OrderByDescending(x => x)
-            .First();
+        var threeOfSame2 = Occurrences.FindIndex(threeOfSame1, x => x >= 3) + 1;
+        if (threeOfSame2 > 0)
+            formationParts.Add(threeOfSame2, 3);
 
         var fourOfSame = Occurrences.FindIndex(x => x >= 4) + 1;
-        
+        if (fourOfSame > 0)
+            formationParts.Add(fourOfSame, 4);
+
         var fiveOfSame = Occurrences.FindIndex(x => x >= 5) + 1;
+        if (fiveOfSame > 0)
+            formationParts.Add(fiveOfSame, 5);
 
         var formations = new FormationNameAndScoreList();
 
         if (Occurrences.Any(x => x == Dices.Count))
             formations.Add(100, Dices.Count == 6 ? FormationName.MaxiYatzy : FormationName.Yatzy);
 
-        if (twoOfSame1 > 0 && fourOfSame > 0)
-            formations.Add(twoOfSameHighest * 2 + fourOfSame * 4, FormationName.Tower);
+        formations.AddIfNotNull(formationParts.GetBestTower());
 
-        if (threeOfSame1 > 0 && threeOfSame2 > 0)
-            formations.Add(threeOfSame1 * 3 + threeOfSame2 * 3, FormationName.Villa);
+        formations.AddIfNotNull(formationParts.GetBestVilla());
 
         if (twoOfSame1 > 0 && threeOfSame1 > 0)
             formations.Add(twoOfSameHighest * 2 + threeOfSameHightest * 3, FormationName.FullHouse);
