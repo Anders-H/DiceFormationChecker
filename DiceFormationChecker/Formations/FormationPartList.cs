@@ -24,7 +24,25 @@ public class FormationPartList : List<FormationPart>
 
     public FormationNameAndScore? GetBestVilla()
     {
+        var threes1 = GetCount(3);
 
+        if (threes1 == null)
+            return null;
+
+        var threes2 = GetCount(3, threes1.Dice);
+
+        return threes2 == null
+            ? null
+            : new FormationNameAndScore(threes1.Score + threes2.Score, FormationName.Villa);
+    }
+
+    public FormationNameAndScore? GetBestThreeOfSame()
+    {
+        var threes = GetCount(3);
+
+        return threes == null
+            ? null
+            : new FormationNameAndScore(threes.Score, FormationName.ThreeOfAKind);
     }
 
     private FormationPart? GetCount(int count) =>

@@ -7,19 +7,12 @@ namespace Winsoft.Gaming.DiceFormationChecker;
 
 public class FormationChecker
 {
-    private readonly List<int> Occurrences;
+    private readonly List<int> _occurrences;
     public readonly List<int> Dices;
-
-    public FormationChecker(List<int> dices)
-    {
-        Occurrences = new List<int>();
-        Dices = dices;
-        CheckDiceList();
-    }
 
     public FormationChecker(params int[] dice)
     {
-        Occurrences = new List<int>();
+        _occurrences = new List<int>();
         Dices = new List<int>();
         Dices.AddRange(dice);
         CheckDiceList();
@@ -31,57 +24,54 @@ public class FormationChecker
             throw new SystemException("Number of dice must be 5 or 6.");
 
         for (var i = 1; i <= 6; i++)
-            Occurrences.Add(Dices.Count(x => x == i));
+            _occurrences.Add(Dices.Count(x => x == i));
 
         var formationParts = new FormationPartList();
 
-        var twoOfSame1 = Occurrences.FindIndex(x => x >= 2) + 1;
+        var twoOfSame1 = _occurrences.FindIndex(x => x >= 2) + 1;
         if (twoOfSame1 > 0)
             formationParts.Add(twoOfSame1, 2);
 
-        var twoOfSame2 = Occurrences.FindIndex(twoOfSame1, x => x >= 2) + 1;
+        var twoOfSame2 = _occurrences.FindIndex(twoOfSame1, x => x >= 2) + 1;
         if (twoOfSame2 > 0)
             formationParts.Add(twoOfSame2, 2);
 
-        var twoOfSame3 = Occurrences.FindIndex(twoOfSame2, x => x >= 2) + 1;
+        var twoOfSame3 = _occurrences.FindIndex(twoOfSame2, x => x >= 2) + 1;
         if (twoOfSame3 > 0)
             formationParts.Add(twoOfSame3, 2);
 
-        var threeOfSame1 = Occurrences.FindIndex(x => x >= 3) + 1;
+        var threeOfSame1 = _occurrences.FindIndex(x => x >= 3) + 1;
         if (threeOfSame1 > 0)
             formationParts.Add(threeOfSame1, 3);
 
-        var threeOfSame2 = Occurrences.FindIndex(threeOfSame1, x => x >= 3) + 1;
+        var threeOfSame2 = _occurrences.FindIndex(threeOfSame1, x => x >= 3) + 1;
         if (threeOfSame2 > 0)
             formationParts.Add(threeOfSame2, 3);
 
-        var fourOfSame = Occurrences.FindIndex(x => x >= 4) + 1;
+        var fourOfSame = _occurrences.FindIndex(x => x >= 4) + 1;
         if (fourOfSame > 0)
             formationParts.Add(fourOfSame, 4);
 
-        var fiveOfSame = Occurrences.FindIndex(x => x >= 5) + 1;
+        var fiveOfSame = _occurrences.FindIndex(x => x >= 5) + 1;
         if (fiveOfSame > 0)
             formationParts.Add(fiveOfSame, 5);
 
         var formations = new FormationNameAndScoreList();
 
-        if (Occurrences.Any(x => x == Dices.Count))
+        if (_occurrences.Any(x => x == Dices.Count))
             formations.Add(100, Dices.Count == 6 ? FormationName.MaxiYatzy : FormationName.Yatzy);
 
         formations.AddIfNotNull(formationParts.GetBestTower());
 
         formations.AddIfNotNull(formationParts.GetBestVilla());
 
-        if (twoOfSame1 > 0 && threeOfSame1 > 0)
-            formations.Add(twoOfSameHighest * 2 + threeOfSameHightest * 3, FormationName.FullHouse);
-
-        if (Occurrences.All(x => x == 1))
+        if (_occurrences.All(x => x == 1))
             formations.Add(21, FormationName.FullStraight);
 
-        if (Occurrences[1] > 0 && Occurrences[2] > 0 && Occurrences[3] > 0 && Occurrences[4] > 0 && Occurrences[5] > 0)
+        if (_occurrences[1] > 0 && _occurrences[2] > 0 && _occurrences[3] > 0 && _occurrences[4] > 0 && _occurrences[5] > 0)
             formations.Add(20, FormationName.BigStraight);
 
-        if (Occurrences[0] > 0 && Occurrences[1] > 0 && Occurrences[2] > 0 && Occurrences[3] > 0 && Occurrences[4] > 0)
+        if (_occurrences[0] > 0 && _occurrences[1] > 0 && _occurrences[2] > 0 && _occurrences[3] > 0 && _occurrences[4] > 0)
             formations.Add(15, FormationName.SmallStraight);
 
         if (fiveOfSame > 0)
@@ -91,7 +81,7 @@ public class FormationChecker
             formations.Add(fourOfSame * 4, FormationName.FourOfAKind);
 
         if (threeOfSame1 > 0)
-            formations.Add(threeOfSameHightest * 3, FormationName.ThreeOfAKind);
+            formations.AddIfNotNull(formationParts.GetBestThreeOfSame());
 
         if (twoOfSame1 > 0 && twoOfSame2 > 0 && twoOfSame3 > 0)
             formations.Add(twoOfSame1 * 2 + twoOfSame2 * 2 + twoOfSame3 * 2, FormationName.ThreePairs);
@@ -104,6 +94,8 @@ public class FormationChecker
 
         if (twoOfSame1 > 0)
             formations.Add(twoOfSame1 * 2, FormationName.Pair);
+
+        formations.AddIfNotNull(formationParts.GetBestFullHouse());
 
         if (formations.Count <= 0)
             formations.Add(0, FormationName.Nothing);
