@@ -58,5 +58,6 @@ public abstract class SpecificFormation : GenericFormation
 
     public FormationNameAndScore? GetFormation(FormationName name) =>
         FormationNameAndScore
+            .OrderByDescending(x => x.Score)
             .FirstOrDefault(formationNameAndScore => formationNameAndScore.FormationName == name);
 }

@@ -11,5 +11,5 @@ public class DiceFormationSix : SpecificFormation
     }
 
     public FormationNameAndScore? GetFormation(FormationNameSixDice name) =>
-        base.GetFormation((FormationName)name);
+        GetFormation((FormationName)name);
 }

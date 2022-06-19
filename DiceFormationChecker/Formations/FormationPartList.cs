@@ -45,6 +45,35 @@ public class FormationPartList : List<FormationPart>
             : new FormationNameAndScore(threes.Score, FormationName.ThreeOfAKind);
     }
 
+    public FormationNameAndScore? GetBestFullHouse()
+    {
+        var threes1 = GetCount(3);
+
+        if (threes1 == null)
+            return null;
+
+        var twos1 = GetCount(3, threes1.Dice) ?? GetCount(2, threes1.Dice);
+
+        if (twos1 == null)
+            return null;
+
+        var result1 = new FormationNameAndScore(threes1.Dice * 3 + twos1.Dice * 2, FormationName.FullHouse);
+
+        var threes2 = GetCount(3, threes1.Dice);
+
+        if (threes2 == null)
+            return result1;
+
+        var twos2 = GetCount(3, threes2.Dice) ?? GetCount(2, threes2.Dice);
+
+        if (twos2 == null)
+            return result1;
+
+        var result2 = new FormationNameAndScore(threes2.Dice * 3 + twos2.Dice * 2, FormationName.FullHouse);
+
+        return result1.Score > result2.Score ? result1 : result2;
+    }
+
     private FormationPart? GetCount(int count) =>
         this.Where(x => x.Count == count)
             .OrderByDescending(x => x.Score)

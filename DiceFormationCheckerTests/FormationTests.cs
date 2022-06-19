@@ -98,5 +98,23 @@ namespace DiceFormationCheckerTests
             Assert.Equal(6, new FormationChecker(6, 1, 3, 3, 2, 5).CheckSixDice().GetFormation(FormationNameSixDice.Pair)!.Score);
             Assert.Null(new FormationChecker(6, 1, 3, 3, 2, 5).CheckSixDice().GetFormation(FormationNameSixDice.Tower));
         }
+
+        [Fact]
+        public void CanDetectFullHouseSixDice()
+        {
+            Assert.Equal(20, new FormationChecker(6, 1, 1, 1, 6, 6).CheckSixDice().GetFormation(FormationNameSixDice.FullHouse)!.Score);
+            Assert.Equal(15, new FormationChecker(2, 1, 1, 1, 6, 6).CheckSixDice().GetFormation(FormationNameSixDice.FullHouse)!.Score);
+            Assert.Equal(20, new FormationChecker(6, 1, 2, 1, 6, 6).CheckSixDice().GetFormation(FormationNameSixDice.FullHouse)!.Score);
+            Assert.Null(new FormationChecker(6, 1, 2, 1, 3, 6).CheckSixDice().GetFormation(FormationNameSixDice.FullHouse));
+        }
+
+        [Fact]
+        public void CanDetectFullHouseFiveDice()
+        {
+            Assert.Equal(20, new FormationChecker(6, 1, 1, 6, 6).CheckFiveDice().GetFormation(FormationNameFiveDice.FullHouse)!.Score);
+            Assert.Equal(15, new FormationChecker(1, 1, 1, 6, 6).CheckFiveDice().GetFormation(FormationNameFiveDice.FullHouse)!.Score);
+            Assert.Equal(20, new FormationChecker(6, 1, 1, 6, 6).CheckFiveDice().GetFormation(FormationNameFiveDice.FullHouse)!.Score);
+            Assert.Null(new FormationChecker(6, 1, 1, 3, 6).CheckFiveDice().GetFormation(FormationNameFiveDice.FullHouse));
+        }
     }
 }

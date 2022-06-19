@@ -86,11 +86,7 @@ public class FormationChecker
         if (twoOfSame1 > 0 && twoOfSame2 > 0 && twoOfSame3 > 0)
             formations.Add(twoOfSame1 * 2 + twoOfSame2 * 2 + twoOfSame3 * 2, FormationName.ThreePairs);
 
-        if (twoOfSame1 > 0 && twoOfSame2 > 0)
-            formations.Add(twoOfSame1 * 2 + twoOfSame2 * 2, FormationName.TwoPairs);
-
-        if (twoOfSame1 > 0 && twoOfSame2 > 0)
-            formations.Add(twoOfSame1 * 2 + twoOfSame2 * 2, FormationName.TwoPairs);
+        formations.AddIfNotNull(formationParts.GetBestTwoPairs());
 
         if (twoOfSame1 > 0)
             formations.Add(twoOfSame1 * 2, FormationName.Pair);
