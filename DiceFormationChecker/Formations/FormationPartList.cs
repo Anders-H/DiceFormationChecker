@@ -74,6 +74,18 @@ public class FormationPartList : List<FormationPart>
         return result1.Score > result2.Score ? result1 : result2;
     }
 
+    public FormationNameAndScore? GetBestTwoPairs()
+    {
+        var twos1 = GetByPairScore();
+
+        if (twos1 == null)
+            return null;
+
+        var twos2 = GetByPairScore(twos1.Dice);
+
+        return twos2 == null ? null : new FormationNameAndScore(twos1.PairScore + twos2.PairScore, FormationName.TwoPairs);
+    }
+
     private FormationPart? GetCount(int count) =>
         this.Where(x => x.Count == count)
             .OrderByDescending(x => x.Score)
@@ -82,5 +94,15 @@ public class FormationPartList : List<FormationPart>
     private FormationPart? GetCount(int count, int notDice) =>
         this.Where(x => x.Count == count && x.Dice != notDice)
             .OrderByDescending(x => x.Score)
+            .FirstOrDefault();
+
+    private FormationPart? GetByPairScore() =>
+        this.Where(x => x.Count >= 2)
+            .OrderByDescending(x => x.PairScore)
+            .FirstOrDefault();
+
+    private FormationPart? GetByPairScore(int notDice) =>
+        this.Where(x => x.Count >= 2 && x.Dice != notDice)
+            .OrderByDescending(x => x.PairScore)
             .FirstOrDefault();
 }
