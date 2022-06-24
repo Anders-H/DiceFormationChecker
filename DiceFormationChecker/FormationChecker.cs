@@ -88,8 +88,7 @@ public class FormationChecker
 
         formations.AddIfNotNull(formationParts.GetBestTwoPairs());
 
-        if (twoOfSame1 > 0)
-            formations.Add(twoOfSame1 * 2, FormationName.Pair);
+        formations.AddIfNotNull(formationParts.GetBestPair());
 
         formations.AddIfNotNull(formationParts.GetBestFullHouse());
 

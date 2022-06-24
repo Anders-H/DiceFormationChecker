@@ -11,7 +11,7 @@ Install-Package Winsoft.Gaming.DiceFormationChecker
 ```
 var formationCheckerFive = new FormationChecker(3, 3, 4, 4, 4);
 
-foreach (var f in formationCheckerFive.CheckFiveDice().FormationNameAndScore)
+foreach (var f in formationCheckerFive.CheckFiveDice().FormationNameAndScore.OrderByDescending(x => x.Score))
 {
     Console.WriteLine(f.FormationName);
     Console.WriteLine(f.Score);
@@ -23,10 +23,12 @@ Output:
 ```
 FullHouse
 18
+TwoPairs
+14
 ThreeOfAKind
 12
 Pair
-6
+8
 ```
 
 ## Six dice example
@@ -34,7 +36,7 @@ Pair
 ```
 var formationCheckerSix = new FormationChecker(3, 3, 3, 4, 4, 4);
 
-foreach (var f in formationCheckerSix.CheckSixDice().FormationNameAndScore)
+foreach (var f in formationCheckerSix.CheckSixDice().FormationNameAndScore.OrderByDescending(x => x.Score))
 {
     Console.WriteLine(f.FormationName);
     Console.WriteLine(f.Score);
@@ -46,6 +48,12 @@ Output:
 ```
 Villa
 21
+FullHouse
+18
+TwoPairs
+14
 ThreeOfAKind
 12
+Pair
+8
 ```

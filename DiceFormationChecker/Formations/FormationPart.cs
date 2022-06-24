@@ -16,6 +16,6 @@ public class FormationPart
 
     public int PairScore =>
         Count < 2
-            ? Dice * 2
-            : 0;
+            ? 0
+            : Dice * 2;
 }

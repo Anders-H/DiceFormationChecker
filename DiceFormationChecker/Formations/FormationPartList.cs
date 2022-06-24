@@ -74,6 +74,13 @@ public class FormationPartList : List<FormationPart>
         return result1.Score > result2.Score ? result1 : result2;
     }
 
+    public FormationNameAndScore? GetBestPair()
+    {
+        var twos = GetByPairScore();
+
+        return twos == null ? null : new FormationNameAndScore(twos.PairScore, FormationName.Pair);
+    }
+
     public FormationNameAndScore? GetBestTwoPairs()
     {
         var twos1 = GetByPairScore();
