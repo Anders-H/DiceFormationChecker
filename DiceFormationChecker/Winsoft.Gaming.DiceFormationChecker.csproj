@@ -1,34 +1,36 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Version>1.1</Version>
-    <Authors>Anders Hesselbom</Authors>
-    <Description>A class that checks the formation of five or six dice.</Description>
-    <PackageProjectUrl>https://github.com/Anders-H/DiceFormationChecker</PackageProjectUrl>
-    <PackageIcon>dice.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/Anders-H/DiceFormationChecker</RepositoryUrl>
-    <AssemblyVersion>1.1</AssemblyVersion>
-    <FileVersion>1.1</FileVersion>
-    <PackageLicenseExpression>GFDL-1.3-or-later</PackageLicenseExpression>
-    <PackageReleaseNotes>Added support for identifying sub types.</PackageReleaseNotes>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Title>Winsoft.Gaming.DiceFormationChecker</Title>
+		<Version>1.2.0</Version>
+		<PackageIcon>dice.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Description>A class that checks the formation of five or six dice for .NET 8.</Description>
+		<PackageProjectUrl>https://github.com/Anders-H/DiceFormationChecker</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Anders-H/DiceFormationChecker</RepositoryUrl>
+		<PackageReleaseNotes>Moved to .NET 8.0.</PackageReleaseNotes>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<Copyright>Anders Hesselbom</Copyright>
+		<AssemblyVersion>1.2.0</AssemblyVersion>
+		<FileVersion>1.2.0</FileVersion>
+		<PackageLicenseExpression>GFDL-1.3-or-later</PackageLicenseExpression>
+		<PackageReleaseNotes>Added support for identifying sub types.</PackageReleaseNotes>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="dice.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
+	<ItemGroup>
+		<None Update="dice.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 </Project>

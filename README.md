@@ -1,6 +1,9 @@
 # Dice Formation Checker
 
-A class that checks the formation of five or six dice for .NET 6.
+A class that checks the formation of five or six dice for .NET 8.
+
+Install version 1.2:
+
 
 ```
 Install-Package Winsoft.Gaming.DiceFormationChecker
